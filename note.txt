@@ -1,3 +1,5 @@
+git: git@github.com:lurongtao/gp7-lagou-admin.git
+
 2018-10-19
 - 目标：搭建一个既有前端，又有后端的项目
 # 前端
