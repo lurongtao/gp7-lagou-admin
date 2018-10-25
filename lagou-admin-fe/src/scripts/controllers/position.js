@@ -79,7 +79,7 @@ const _removePosition = async ({
       pageNo = pageNo - 1
     }
     // 给路由加个ID来实现新的路由的跳转
-    router.go(`/position?_=${id}&pageNo=${pageNo}&keywords=${keywords}`)
+    router.go(`/position?_=${id}&pageNo=${pageNo}&keywords=${keywords || ''}`)
   } else {
     alert('删除失败:(')
   }
