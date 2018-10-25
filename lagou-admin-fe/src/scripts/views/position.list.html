@@ -54,12 +54,13 @@
   {{if list.length > 0}}
   <div class="box-footer clearfix">
     <ul class="pagination pagination-sm no-margin pull-right">
-      <li><a href="/#/position?pageNo={{pageNo > 1 ? pageNo - 1 : 1}}&keywords={{keywords}}">&laquo;</a></li>
+      <li><a href="/#/position?pageNo={{pageNo > 1 ? pageNo - 1 : 1}}&keywords={{keywords || ''}}">&laquo;</a></li>
       {{ each pageArray }}
-      <li class="{{ ~~pageNo === $index + 1 ? 'active' : '' }}"><a href="/#/position?pageNo={{$index + 1}}&keywords={{keywords}}">{{ $index +
+<li class="{{ ~~pageNo === $index + 1 ? 'active' : '' }}"><a href="/#/position?pageNo={{$index + 1}}&keywords={{keywords || ''}}">{{
+    $index +
           1 }}</a></li>
       {{ /each }}
-      <li><a href="/#/position?pageNo={{pageNo < pageCount ? pageNo + 1 : pageCount}}&keywords={{keywords}}">&raquo;</a></li>
+<li><a href="/#/position?pageNo={{pageNo < pageCount ? pageNo + 1 : pageCount}}&keywords={{keywords || ''}}">&raquo;</a></li>
     </ul>
   </div>
   {{/if}}
