@@ -67,8 +67,7 @@ const _removePosition = async ({
   let id = $(that).attr('posid')
   let result = await positionModel.remove(id)
   if (result.ret) {
-    let {keywords = ''} = req.query || {}
-    let pageNo = ~~req.query.pageNo
+    let {keywords = '', pageNo} = req.query || {pageNo: 1}
     //1、去后端取最鲜活的total, 根据total 计算最鲜活的 pageCount
     let total = (await positionModel.listall({keywords})).data.total
     //2、计算鲜活的pageCount
