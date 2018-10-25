@@ -1,0 +1,66 @@
+2018-10-19
+- 目标：搭建一个既有前端，又有后端的项目
+# 前端
+## webpack：模块打包工具
+> yarn add webpack
+> ./node_modules/.bin/webpack ./src/app.js -o ./dev/bundle.js --mode development
+
+## webpack 官网
+https://webpack.js.org/
+https://www.webpackjs.com/
+
+## plugins
+yarn add html-webpack-plugin --dev
+
+## base64
+图片编码：把图片编译成一段文本
+优点：减少HTTP请求
+缺点：文件太大不适合作base64
+
+2018-10-21
+# 拉勾网管理信息系统
+## 架构：前后端分离
+# 前端
+- Webpack 开发环境搭建
+1.entry：字符串，数组，对象
+2.output: filename, path
+3.插件：
+html-webpack-plugin
+copy-webpack-plugin
+4.webserver
+webpack-dev-server: 默认热更新，且将生成的静态文件放到内存里
+5.loader
+sass-loader, css-loader, style-loader, bebal-loader, string-loader, url-loader, file-loader
+6.copy文件
+copy-webpack-plugin
+
+- 前端UI框架
+# 基于bootstrap的AdminLTE
+# 文案，话术：PM
+# 用户体验设计事(UEX)，交互设计师(IDX)
+# 文件命名
+1.小驼峰(camelCase)
+2.大驼峰(PascalCase)
+3.连接符(kebab-case)
+# router-view
+插座（outlet）
+
+2018-10-22
+# 路由 SME-router
+- 定义路由 router.route(url, (req, res, next)=>{})
+- req.params, req.body, req.query; res.render(str)
+- 路由跳转 router.go(url, {x: 1})
+- 中间件：router.use(()=>{}), 在路由切换调用
+
+# 前端：RMVC
+
+# 后端：RMVC（Node.js, Express, EJS）
+- listall
+
+# art-template
+https://aui.github.io/art-template/
+
+2018-10-23
+# 图片上传，前端
+https://www.cnblogs.com/jkko123/p/6294574.html
+https://blog.csdn.net/m0_37505854/article/details/79639046

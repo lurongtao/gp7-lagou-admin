@@ -1,0 +1,6 @@
+lagou-admin-be/*.zip
+lagou-admin-be/node_modules
+lagou-admin-fe/*.zip
+lagou-admin-fe/node_modules
+.vscode
+.DS_Store
