@@ -48,19 +48,25 @@ const _bindUserInfoEvents = () => {
             username: result.data.username
           }))
 
-          // 登出按钮绑定
-          $('#signoutbtn').on('click', async () => {
-            let result = await userModel.signout()
-            if (result.ret) {
-              location.reload()
-            }
-          })
+          _bindSignoutEvent()
         } else {
           alert(result.data.msg)
         }
       }
     })
+  })
 
+  // 登出按钮绑定
+  _bindSignoutEvent()
+}
+
+const _bindSignoutEvent = () => {
+  // 登出按钮绑定
+  $('#signoutbtn').off('click').on('click', async () => {
+    let result = await userModel.signout()
+    if (result.ret) {
+      location.reload()
+    }
   })
 }
 

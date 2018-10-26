@@ -55,16 +55,13 @@
     </div>
   </li> -->
   <!-- Menu Footer-->
-  <li class="user-footer">
+  <li class="user-footer" id="user-footer">
     <div class="pull-left">
       <a href="javascript:;" class="btn btn-default btn-flat">关闭</a>
     </div>
-    {{if !isSignin}}
-    <div class="pull-right" id="userbtn"></div>
-    {{ else }}
-    <div class="pull-right">
+    <div class="pull-right {{isSignin ? 'hidden' : ''}}" id="userbtn"></div>
+    <div class="pull-right {{!isSignin ? 'hidden' : ''}}">
       <a href="javascript:;" id="signoutbtn" class="btn btn-default btn-flat">退出</a>
     </div>
-    {{ /if }}
   </li>
 </ul>
