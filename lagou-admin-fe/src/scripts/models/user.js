@@ -9,6 +9,27 @@ const sign = ({url, data}) => {
   })
 }
 
+const isSignin = () => {
+  return $.ajax({
+    url: '/api/user/isSignin',
+    success: (result) => {
+      return result
+    }
+  })
+}
+
+const signout = () => {
+  return $.ajax({
+    url: '/api/user/signout',
+    dataType: 'json',
+    success: (result) => {
+      return result
+    }
+  })
+}
+
 export default {
-  sign
+  sign,
+  isSignin,
+  signout
 }

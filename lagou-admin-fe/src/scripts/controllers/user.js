@@ -27,6 +27,7 @@ const _bindUserInfoEvents = () => {
 
     $('#userform').get(0).reset()
 
+    // 注册和登录按钮绑定
     $('#sign').on('click', async function () {
       let url = signupClicked ? '/api/user/signup' : '/api/user/signin'
       let data = $('#userform').serialize()
@@ -39,23 +40,44 @@ const _bindUserInfoEvents = () => {
       if (signupClicked) {
         alert(result.data.msg)
       } else {
-        isSignin = true
-        $('#user').html(template.render(userTpl, {
-          isSignin,
-          username: result.data.username
-        }))
+        // 当用户点击了登录按钮
+        if (result.ret) {
+          isSignin = true
+          $('#user').html(template.render(userTpl, {
+            isSignin,
+            username: result.data.username
+          }))
+
+          // 登出按钮绑定
+          $('#signoutbtn').on('click', async () => {
+            let result = await userModel.signout()
+            if (result.ret) {
+              location.reload()
+            }
+          })
+        } else {
+          alert(result.data.msg)
+        }
       }
     })
+
   })
 }
 
-const render = () => {
+const render = async () => {
+  // 获取用户登录状态
+  let result = await userModel.isSignin()
+  if (result.ret) {
+    isSignin = true
+  }
+
   // 渲染：判断用户是否登录
   // todo
   // 开始渲染
 
   $('#user').html(template.render(userTpl, {
-    isSignin
+    isSignin,
+    username: result.data.username
   }))
 
   $('#userbtn').html(template.render(userBtnTpl, {
@@ -64,9 +86,9 @@ const render = () => {
   
 
   // 如果用户没有登录，再去绑定显示用户登录信息的窗口，为了减少不必要的事件绑定
-  if (!isSignin) {
+  // if (!isSignin) {
     _bindUserInfoEvents()
-  }
+  // }
 }
 
 export default {

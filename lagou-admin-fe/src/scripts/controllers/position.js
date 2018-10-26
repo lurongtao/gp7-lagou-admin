@@ -131,18 +131,24 @@ const list = async ({
   res,
   req
 }) => {
+  let result = (await positionModel.list({
+    pageNo,
+    pageSize,
+    keywords
+  }))
+  
+  // 用户是否登录
+  if (!result.ret) {
+    router.go('/home')
+    return
+  } else {
+    var { list, total } = result.data
+  }
+
   let {
     pageNo = 1, pageSize = 10, keywords = ''
   } = req.query || {}
 
-  let {
-    total,
-    list
-  } = (await positionModel.list({
-    pageNo,
-    pageSize,
-    keywords
-  })).data
 
   let pageCount = Math.ceil(total / ~~pageSize)
   let html = template.render(positionListTpl, {
