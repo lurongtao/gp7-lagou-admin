@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
 })
 const UserModel = mongoose.model('users', userSchema)
 
+// 注册
 const signup = (data) => {
   let userModel = new UserModel(data)
   return userModel
@@ -16,6 +17,15 @@ const signup = (data) => {
     })
 }
 
+// 查找用户
+const findone = (condition) => {
+  return UserModel.findOne(condition)
+    .then((result) => {
+      return result
+    })
+}
+
 module.exports = {
-  signup
+  signup,
+  findone
 }

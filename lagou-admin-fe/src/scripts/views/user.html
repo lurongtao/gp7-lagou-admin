@@ -9,7 +9,7 @@
     <span type="signup">注册</span>
   </span>
   {{ else }}
-  <span class="hidden-xs">xinyi</span>
+  <span class="hidden-xs">{{username || ''}}</span>
   {{ /if }}
 </a>
 <ul class="dropdown-menu">
@@ -19,8 +19,8 @@
     <img src="./public/images/user2-160x160.jpg" class="img-circle" alt="User Image">
 
     <p>
-      Alexander Pierce - Web Developer
-      <small>Member since Nov. 2012</small>
+      热烈欢迎 - 你可以进行职位管理
+      <small>{{username}}</small>
     </p>
   </li>
   {{ else }}

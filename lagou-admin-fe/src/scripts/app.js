@@ -10,6 +10,7 @@ import '../styles/app.scss'
 
 // 装填Wrapper
 $('#root').html(bodyTpl)
+
 // 装载user
 $('#user').html(userTpl)
 // 绑定显示用户信息的事件

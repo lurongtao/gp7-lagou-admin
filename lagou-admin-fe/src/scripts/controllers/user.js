@@ -34,6 +34,17 @@ const _bindUserInfoEvents = () => {
         url,
         data
       })
+
+      // 用户登录或注册成功处理
+      if (signupClicked) {
+        alert(result.data.msg)
+      } else {
+        isSignin = true
+        $('#user').html(template.render(userTpl, {
+          isSignin,
+          username: result.data.username
+        }))
+      }
     })
   })
 }
