@@ -1,6 +1,18 @@
 const positionModel = require('../models/position')
 const moment = require('moment')
 
+var server = require('http').createServer();
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  socket.on('msg', (data) => {
+    console.log(data)
+  })
+  socket.broadcast.emit('title', 'world')
+});
+
+server.listen(9002);
+
 // 显示全部数据
 const list = async (req, res, next) => {
   res.header('Content-Type', 'application/json; charset=utf-8')

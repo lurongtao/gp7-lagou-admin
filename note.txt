@@ -78,3 +78,6 @@ ssh-keygen -t rsa -b 2048 -f private.key
 
 生成公钥：
 openssl rsa -in private.key -pubout -outform PEM -out public.key
+
+# socket.io
+https://socket.io/

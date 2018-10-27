@@ -17,4 +17,6 @@ router.delete('/remove', positionController.remove)
 router.post('/update', fileUploadMiddleWare.fileupload, positionController.update)
 router.post('/listone', positionController.listone)
 
+router.get('/fe/list', positionController.list)
+
 module.exports = router

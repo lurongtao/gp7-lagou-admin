@@ -1,5 +1,3 @@
-import { json } from "body-parser";
-
 const sign = ({url, data}) => {
   return $.ajax({
     url,

@@ -6,6 +6,8 @@ import userTpl from './views/user.html'
 
 import userController from './controllers/user'
 
+// import $ from 'jquery'
+
 import '../styles/app.scss'
 
 // 装填Wrapper
