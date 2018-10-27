@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt')
-
+const jwt = require('jsonwebtoken')
+const auth = require('../utils/auth')
 const userModel = require('../models/user')
+const fs = require('fs')
+const path = require('path')
 
 const signup = async (req, res, next) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
@@ -56,13 +59,25 @@ const signin = async (req, res, next) => {
 
     // 如果密码正确，构建用户登录成功的状态
     if (isCorrect) {
-      // 采用express-session模块：
-      // 用来在服务器端产生一个SessionID: ID可以存在数据库里，默认保存在内存里
-      // 同时会给浏览器种一个cookie(res.setCookie), cookie的内容是SessionID
-      // 这个操作需要在app.js里做session的初始化配置，配置后，req.session对象就有了
-      req.session.username = username
+      // 基于jwt 的认证机制
+      // 1、生成token
+      // 方法一：对称加密
 
-      // 讲用户名给前端
+      // 签名
+      let cert = fs.readFileSync(path.resolve(__dirname, '../keys/private.key'))
+      // 载荷
+      let payload = {
+        username,
+        // 过期时间
+        iat: 24 * 60 * 60
+      }
+
+      let token = jwt.sign(payload, cert, {
+        algorithm: 'RS256'
+      })
+      res.header('X-Access-Token', token)
+
+      // 将用户名和token给前端
       res.render('position', {
         ret: true,
         data: JSON.stringify({
@@ -88,15 +103,17 @@ const signin = async (req, res, next) => {
 }
 
 // 判断用户是否登录
-const isSignin = (req, res, next) => {
+const isSignin = async (req, res, next) => {
   res.header('Content-Type', 'application/json; charset=utf-8')
 
-  let username = req.session.username
-  if (!!username) {
+  // 认证过程
+  let encoded = await auth(req.header('X-Access-Token'))
+  
+  if (!!encoded) {
     res.render('user', {
       ret: true,
       data: JSON.stringify({
-        username
+        username: encoded.username
       })
     })
   } else {
@@ -107,20 +124,6 @@ const isSignin = (req, res, next) => {
       })
     })
   }
-}
-
-// 用户登出
-const signout = (req, res, next) => {
-  res.header('Content-Type', 'application/json; charset=utf-8')
-
-  req.session.username = null
-  
-  res.render('user', {
-    ret: true,
-    data: JSON.stringify({
-      msg: '退出成功~'
-    })
-  })
 }
 
 const _doCrypto = (password) => {
@@ -144,6 +147,5 @@ const _comparePwd = (fromUser, fromDatabase) => {
 module.exports = {
   signup,
   signin,
-  isSignin,
-  signout
+  isSignin
 }

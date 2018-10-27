@@ -1,17 +1,25 @@
+import { json } from "body-parser";
+
 const sign = ({url, data}) => {
   return $.ajax({
     url,
     data,
-    type: 'POST',
-    success: (result) => {
-      return result
-    }
+    type: 'POST'
   })
+    .then((result, status, xhr) => {
+      return {
+        result,
+        token: xhr.getResponseHeader('x-access-token')
+      }
+    })
 }
 
-const isSignin = () => {
+const isSignin = ({token}) => {
   return $.ajax({
     url: '/api/user/isSignin',
+    headers: {
+      'X-Access-Token': token
+    },
     success: (result) => {
       return result
     }

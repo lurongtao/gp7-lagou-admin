@@ -69,3 +69,12 @@ https://blog.csdn.net/m0_37505854/article/details/79639046
 
 2018-10-27
 # 重放攻击
+
+# jwt
+- json web token
+
+生成私钥：
+ssh-keygen -t rsa -b 2048 -f private.key
+
+生成公钥：
+openssl rsa -in private.key -pubout -outform PEM -out public.key

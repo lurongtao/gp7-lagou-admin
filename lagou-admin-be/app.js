@@ -1,6 +1,5 @@
 var createError = require('http-errors');
 var express = require('express');
-var session = require('express-session')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -15,18 +14,6 @@ var app = express();
 // 设置应用views路径
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-// session 配置
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true, 
-    secure: false,
-    maxAge: 24 * 60 * 60 * 1000
-  }
-}))
 
 app.use(logger('dev'));
 app.use(express.json());

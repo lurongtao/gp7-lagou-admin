@@ -31,7 +31,8 @@ const _bindUserInfoEvents = () => {
     $('#sign').on('click', async function () {
       let url = signupClicked ? '/api/user/signup' : '/api/user/signin'
       let data = $('#userform').serialize()
-      let result = await userModel.sign({
+
+      let {result, token} = await userModel.sign({
         url,
         data
       })
@@ -48,6 +49,9 @@ const _bindUserInfoEvents = () => {
             username: result.data.username
           }))
 
+          // 种token
+          localStorage.setItem('token', token)
+
           _bindSignoutEvent()
         } else {
           alert(result.data.msg)
@@ -63,16 +67,18 @@ const _bindUserInfoEvents = () => {
 const _bindSignoutEvent = () => {
   // 登出按钮绑定
   $('#signoutbtn').off('click').on('click', async () => {
-    let result = await userModel.signout()
-    if (result.ret) {
-      location.reload()
-    }
+    let result = localStorage.removeItem('token')
+    location.reload()
   })
 }
 
 const render = async () => {
   // 获取用户登录状态
-  let result = await userModel.isSignin()
+  // 获取token
+  let token = localStorage.getItem('token') || ''
+  let result = await userModel.isSignin({
+    token
+  })
   if (result.ret) {
     isSignin = true
   }

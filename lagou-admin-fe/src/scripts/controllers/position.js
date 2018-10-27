@@ -47,15 +47,6 @@ const _bindListEvents = ({
     }
     router.go(`/position?${$.param(query)}`)
   })
-  // input事件，输入内容就触发
-  // change 事件，失去焦点触发
-  // $('#keywords').on('input', function () {
-  //   clearTimeout($(this).timer)
-  //   $(this).timer = setTimeout(() => {
-  //     let keywords = $(this).val()
-  //     console.log(keywords)
-  //   }, 2000)
-  // })
 }
 
 const _removePosition = async ({
@@ -92,13 +83,6 @@ const _bindSaveEvents = (router) => {
 
   // 给提交按钮绑定事件
   $('#possubmit').on('click', async () => {
-    // let data = $('#possave').serialize()
-    // let result = await positionModel.save(data)
-    // if (result.ret) {
-    //   $('#possave').get(0).reset()
-    // } else {
-    //   alert(result.data.msg)
-    // }
     let result = await positionModel.save()
 
     if (result.ret) {
@@ -134,10 +118,12 @@ const list = async ({
   let result = (await positionModel.list({
     pageNo,
     pageSize,
-    keywords
+    keywords,
+    token: localStorage.getItem('token') || ''
   }))
   
   // 用户是否登录
+  // 决定是否有权限访问list
   if (!result.ret) {
     router.go('/home')
     return

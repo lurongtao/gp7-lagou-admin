@@ -2,14 +2,16 @@
 const list = ({
   pageNo,
   pageSize,
-  keywords
+  keywords,
+  token
 }) => {
   return $.ajax({
     url: '/api/position/list',
     data: {
       pageNo,
       pageSize,
-      keywords
+      keywords,
+      token
     },
     success: (result) => {
       return result

@@ -14,6 +14,4 @@ router.post('/signin', userController.signin)
 
 router.get('/isSignin', userController.isSignin)
 
-router.get('/signout', userController.signout)
-
 module.exports = router;
