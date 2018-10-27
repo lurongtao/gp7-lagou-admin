@@ -90,7 +90,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, "../dev"),
     compress: true,
     port: 9000,
-    host: '10.9.188.13',
+    host: 'localhost',
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
